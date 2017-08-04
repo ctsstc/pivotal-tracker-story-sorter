@@ -10,4 +10,13 @@ stories = states.each_with_object({}) do |state, memo|
   memo[state] = project.stories(with_state: state)
 end
 
-puts stories.to_json
+purdy = stories.map do |(key, stories)|
+  puts "Key #{key} Stories #{stories}"
+  stories.map do |story|
+    puts "Story #{story}"
+    story.name
+  end
+end
+
+puts "PURDY"
+puts purdy.to_json
