@@ -4,12 +4,10 @@ require 'tracker_api'
 client = TrackerApi::Client.new(token: ENV['API_TOKEN'])
 
 project = client.project(ENV['PROJECT_ID'])
-states = ['accepted', 'delivered', 'finished', 'started', 'rejected', 'planned', 'unstarted', 'unscheduled']
+states = %i[accepted delivered finished started rejected planned unstarted unscheduled]
 
-stories = states.reduce({}) do |prev, cur|
-  cur = cur.to_sym
-  prev[cur] = project.stories(with_state: cur)
-  prev
+stories = states.each_with_object({}) do |state, memo|
+  memo[state] = project.stories(with_state: state)
 end
 
 puts stories.to_json
