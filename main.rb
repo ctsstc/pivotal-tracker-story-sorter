@@ -11,12 +11,14 @@ stories = states.each_with_object({}) do |state, memo|
 end
 
 purdy = stories.map do |(key, stories)|
-  puts "Key #{key} Stories #{stories}"
-  stories.map do |story|
-    puts "Story #{story}"
-    story.name
-  end
+  puts ''
+  puts "Key #{key} Stories #{stories.count}"
+  { key => stories.map do |story|
+    puts "Story #{story.name}"
+    { story.name => story.labels.map(&:name) }
+  end }
 end
 
-puts "PURDY"
+puts ''
+puts 'PURDY'
 puts purdy.to_json
