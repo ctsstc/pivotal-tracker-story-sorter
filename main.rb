@@ -1,5 +1,6 @@
 require 'dotenv/load'
 require 'tracker_api'
+# require 'pry'
 
 client = TrackerApi::Client.new(token: ENV['API_TOKEN'])
 
@@ -7,7 +8,7 @@ project = client.project(ENV['PROJECT_ID'])
 #states = %i[accepted delivered finished started rejected planned unstarted unscheduled]
 states = %i[planned delivered finished started rejected]
 
-# aperently the come through in the order that they're displayed.
+# apparently they come through in the order that they're displayed.
 all_stories = project.stories
 puts "SIZEN #{all_stories.count}"
 test = all_stories.map do |story|
@@ -17,6 +18,31 @@ puts test
 
 stories = states.each_with_object({}) do |state, memo|
   memo[state] = project.stories(with_state: state)
+end
+
+# Sort Collection By Labels
+#ar.sort do |a, b|
+#  case
+#  when a.x < b.x
+#    -1
+#  when a.x > b.x
+#    1
+#  else
+#    a.y <=> b.y
+#  end
+#end 
+
+# Update Order
+last_story = false
+stories.each do |(type_key, type)|
+  type.each do |story|
+    if last_story
+      story.after_id = last_story.id
+      story.save
+      sleep 0.2
+    end
+    last_story = story
+  end
 end
 
 purdy = stories.map do |(key, stories)|
