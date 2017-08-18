@@ -1,6 +1,6 @@
 GIT
-  remote: https://github.com/dashofcode/tracker_api.git
-  revision: 067e688311f03834dfc04326cc16f9203ce0517b
+  remote: git://github.com/dashofcode/tracker_api.git
+  revision: ccfea7bd868ded2b934cbd594ee22e2852790f9f
   branch: no-delete-labels-on-save
   specs:
     tracker_api (1.7.1)
@@ -9,6 +9,7 @@ GIT
       excon
       faraday
       faraday_middleware
+      mimemagic
       multi_json
       representable
       virtus
@@ -55,7 +56,7 @@ GEM
     equalizer (0.0.11)
     erubi (1.6.1)
     excon (0.58.0)
-    faraday (0.12.2)
+    faraday (0.13.0)
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.12.2)
       faraday (>= 0.7.4, < 1.0)
@@ -64,6 +65,7 @@ GEM
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     method_source (0.8.2)
+    mimemagic (0.3.2)
     mini_portile2 (2.2.0)
     minitest (5.10.3)
     multi_json (1.12.1)

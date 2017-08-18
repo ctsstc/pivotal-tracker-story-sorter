@@ -1,3 +1,4 @@
+require 'bundler/setup'
 require 'dotenv/load'
 require 'tracker_api'
 # require 'pry'
